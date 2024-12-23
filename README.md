@@ -6,6 +6,8 @@ Although I am using neovim, I think it is completely fine for you to put all the
 
 * Normal mode
 
+![normal](/screenshots/normal.png)
+
 * Insert mode
 
 * Visual mode
