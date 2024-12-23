@@ -106,8 +106,8 @@ set mouse=a
 "don't redraw while executing macros (good performance config)
 set lazyredraw
 
-"pressing ;s will toggle and untoggle spell checking
-let mapleader = ";"
+"pressing [s will toggle and untoggle spell checking
+let mapleader = "["
 map <leader>s :setlocal spell!<CR>
 map <leader>n :setlocal nospell<CR>
 
