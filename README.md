@@ -8,6 +8,10 @@ Although I am using neovim, I think it is completely fine for you to put all the
 
   You can press `[r` to run python, C/C++ code.
 
+* Latex, Typst
+
+  Latex and Typst will auto compile when you save it with `:w`
+
 # Screenshots
 
 * Normal mode
