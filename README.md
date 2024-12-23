@@ -5,6 +5,7 @@ Although I am using neovim, I think it is completely fine for you to put all the
 # Code Runner
 
 * Python, C/C++
+
   You can press `[r` to run python, C/C++ code.
 
 # Screenshots
