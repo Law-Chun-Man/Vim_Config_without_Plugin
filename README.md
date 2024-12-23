@@ -1,6 +1,6 @@
 # Vim Config without Plugin
 
-Although I am using neovim, I think it is completely fine for you to put all the code in .vimrc
+Although I am using neovim, I think it is completely fine to put all the code in .vimrc. I like default colour scheme, don't judge me:)
 
 # Code Runner
 
