@@ -18,7 +18,6 @@ Although I am using neovim, I think it is completely fine to put all the code in
 
 ![normal mode](/screenshots/normal.png)
 
----
 
 * Insert mode
 
