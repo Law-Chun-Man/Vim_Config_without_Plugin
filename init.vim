@@ -126,7 +126,3 @@ autocmd FileType c map <leader>r :!gcc "%" && ./a.out<CR>
 autocmd BufWritePost *.typ :execute "!typst compile %" | redraw!
 autocmd BufWritePost *.tex :execute "!pdflatex %"
 autocmd BufRead,BufNewFile *.typ,*.tex map <leader>p :!xdg-open "%:r.pdf"<CR><CR>
-
-"this is to immediately render when modified
-"autocmd TextChanged,TextChangedI *.typ execute "write | !typst compile %"
-
