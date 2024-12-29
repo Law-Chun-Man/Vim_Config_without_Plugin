@@ -118,11 +118,20 @@ map <leader>c g<C-g>
 tnoremap <C-[> <C-\><C-n>
 
 "run code
-map <leader>r :!r.sh<CR>
+map <leader>r :!./r.sh<CR>
 autocmd FileType python map <leader>r :!python3 "%"<CR>
 autocmd FileType cpp map <leader>r :!g++ "%" && ./a.out<CR>
 autocmd FileType c map <leader>r :!gcc "%" && ./a.out<CR>
+"for kitty
+map <F22> :!./r.sh<CR>
+autocmd FileType python map <F22> :!python3 "%"<CR>
+autocmd FileType cpp map <F22> :!g++ "%" && ./a.out<CR>
+autocmd FileType c map <F22> :!gcc "%" && ./a.out<CR>
 "remember to open terminal in directory and open file with vi gg.tex
-autocmd BufWritePost *.typ :execute "!typst compile %" | redraw!
+autocmd BufWritePost *.typ :execute "!typst compile %"
 autocmd BufWritePost *.tex :execute "!pdflatex %"
 autocmd BufRead,BufNewFile *.typ,*.tex map <leader>p :!xdg-open "%:r.pdf"<CR><CR>
+
+"this is to immediately render when modified
+"autocmd TextChanged,TextChangedI *.typ execute "write | !typst compile %"
+
