@@ -28,17 +28,21 @@ function! GetMode()
   return get(l:mode_map, mode(), 'Unknown')
 endfunction
 
+hi StatusLineMode guifg=#000000 guibg=#00ff00 gui=bold
+hi StatusLineFile guifg=#FFFFFF guibg=#771177 gui=bold
+hi StatusLineNormal guifg=#FFFFFF guibg=#332233 gui=bold
+hi StatusLineWord guifg=#FFFFFF guibg=#662266 gui=bold
+hi StatusLinePos guifg=#FFFFFF guibg=#771177 gui=bold
+hi StatusLinePercent guifg=#FFFFFF guibg=#880088 gui=bold
 
 "set initial status line
-set statusline=%t\ %m\ \ \ \ %{wordcount().words}\ words,\ %{wordcount().chars}\ chars%=%l,%v\ \ \ \ %p%%\ \ \ \ %{GetMode()}
-hi StatusLine guifg=#00FF00 guibg=#000000
-
+set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineFile#\ %t\ %#StatusLineNormal#\ %m%=%#StatusLineWord#\ %{wordcount().words}\ words,\ %{wordcount().chars}\ chars\ %#StatusLinePos#\ %l,\ %v\ %#StatusLinePercent#\ %p%%\ 
 
 "set status line for different mode
-autocmd ModeChanged * if &modifiable && mode() ==# 'n' | hi StatusLine guifg=#00FF00 guibg=#000000 | set statusline=%t\ %m\ \ \ \ %{wordcount().words}\ words,\ %{wordcount().chars}\ chars%=%l,%v\ \ \ \ %p%%\ \ \ \ %{GetMode()} | endif
-autocmd ModeChanged * if &modifiable && mode() ==# 'i' | hi StatusLine guifg=#FFA500 guibg=#000000 | set statusline=%t\ %m\ \ \ \ %{wordcount().words}\ words,\ %{wordcount().chars}\ chars%=%l,%v\ \ \ \ %p%%\ \ \ \ %{GetMode()} | endif
-autocmd ModeChanged * if &modifiable && mode() ==# 'R' | hi StatusLine guifg=#FF0000 guibg=#FFFFFF | set statusline=%t\ %m\ \ \ \ %{wordcount().words}\ words,\ %{wordcount().chars}\ chars%=%l,%v\ \ \ \ %p%%\ \ \ \ %{GetMode()} | endif
-autocmd ModeChanged * if &modifiable && mode() ==# 'v' || mode() ==# 'V' || mode() ==# "\<C-v>" | hi StatusLine guifg=#00FFFF guibg=#000000 | set statusline=%t\ %m\ \ \ \ %{wordcount().visual_words}\ words,\ %{wordcount().visual_chars}\ chars%=%l,%v\ \ \ \ %p%%\ \ \ \ %{GetMode()} | endif
+autocmd ModeChanged * if &modifiable && mode() ==# 'n' | hi StatusLineMode guifg=#000000 guibg=#00FF00 | set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineFile#\ %t\ %#StatusLineNormal#\ %m%=%#StatusLineWord#\ %{wordcount().words}\ words,\ %{wordcount().chars}\ chars\ %#StatusLinePos#\ %l,\ %v\ %#StatusLinePercent#\ %p%%\ | endif
+autocmd ModeChanged * if &modifiable && mode() ==# 'i' | hi StatusLineMode guifg=#000000 guibg=#FFA500 | set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineFile#\ %t\ %#StatusLineNormal#\ %m%=%#StatusLineWord#\ %{wordcount().words}\ words,\ %{wordcount().chars}\ chars\ %#StatusLinePos#\ %l,\ %v\ %#StatusLinePercent#\ %p%%\ | endif
+autocmd ModeChanged * if &modifiable && mode() ==# 'R' | hi StatusLineMode guifg=#FFFFFF guibg=#FF0000 | set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineFile#\ %t\ %#StatusLineNormal#\ %m%=%#StatusLineWord#\ %{wordcount().words}\ words,\ %{wordcount().chars}\ chars\ %#StatusLinePos#\ %l,\ %v\ %#StatusLinePercent#\ %p%%\ | endif
+autocmd ModeChanged * if &modifiable && mode() ==# 'v' || mode() ==# 'V' || mode() ==# "\<C-v>" | hi StatusLineMode guifg=#000000 guibg=#00FFFF | set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineFile#\ %t\ %#StatusLineNormal#\ %m%=%#StatusLineWord#\ %{wordcount().visual_words}\ words,\ %{wordcount().visual_chars}\ chars\ %#StatusLinePos#\ %l,\ %v\ %#StatusLinePercent#\ %p%%\ | endif
 
 
 "disable autocommenting
@@ -120,17 +124,27 @@ tnoremap <C-[> <C-\><C-n>
 "run code
 map <leader>r :!./r.sh<CR>
 autocmd FileType python map <leader>r :!python3 "%"<CR>
+autocmd FileType python map <leader>f :!black "%"<CR><CR>
+autocmd FileType rust map <leader>r :!cargo run --profile release<CR>
+autocmd FileType rust map <leader>f :!rustfmt "%"<CR><CR>
 autocmd FileType cpp map <leader>r :!g++ "%" && ./a.out<CR>
 autocmd FileType c map <leader>r :!gcc "%" && ./a.out<CR>
 "for kitty
 map <F22> :!./r.sh<CR>
 autocmd FileType python map <F22> :!python3 "%"<CR>
+autocmd FileType rust map <F22> :!cargo run --profile release<CR>
 autocmd FileType cpp map <F22> :!g++ "%" && ./a.out<CR>
 autocmd FileType c map <F22> :!gcc "%" && ./a.out<CR>
 "remember to open terminal in directory and open file with vi gg.tex
-autocmd BufWritePost *.typ :execute "!typst compile %"
-autocmd BufWritePost *.tex :execute "!pdflatex %"
+autocmd BufWritePost *.typ :execute "!typst compile main.typ"
+"autocmd BufWritePost *.typ :execute "!typst compile %"
+autocmd BufWritePost *.tex :execute "!./compile.sh %"
+autocmd VimLeave *.tex :execute "!./clean.sh"
+"autocmd BufRead,BufNewFile *.tex map <F11> :!bibtex "%:r.aux"<CR><CR>
+autocmd BufRead,BufNewFile *.tex map <F11> :!bibtex "main.aux"<CR><CR>
 autocmd BufRead,BufNewFile *.typ,*.tex map <leader>p :!xdg-open "%:r.pdf"<CR><CR>
+
+autocmd BufNewFile,BufRead *.typ set filetype=rust
 
 "this is to immediately render when modified
 "autocmd TextChanged,TextChangedI *.typ execute "write | !typst compile %"
