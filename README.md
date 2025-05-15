@@ -10,7 +10,7 @@ Although I am using neovim, I think it is completely fine to put all the code in
 
 * Latex
 
-  Latex and Typst will auto compile when you save it with `:w`
+  Latex will auto compile when you save it with `:w`
 
 # Screenshots
 
