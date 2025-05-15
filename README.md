@@ -8,7 +8,7 @@ Although I am using neovim, I think it is completely fine to put all the code in
 
   You can press `space+r` to run python, C/C++ code.
 
-* Latex, Typst
+* Latex
 
   Latex and Typst will auto compile when you save it with `:w`
 
