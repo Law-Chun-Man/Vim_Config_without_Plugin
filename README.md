@@ -14,7 +14,7 @@ Although I am using neovim, I think it is completely fine to put all the code in
 
 # Spell Check
 
-You can toggle spell check on and off by `space+s`. Spell check will be on by default when you open files with extention `.txt`, `.tex`, `.md`, `.html`.
+You can toggle spell check on and off by `space+s`. Spell check will be on by default when you open files with extention `.txt`, `.tex`, `.md` and `.html`.
 
 # Screenshots
 
