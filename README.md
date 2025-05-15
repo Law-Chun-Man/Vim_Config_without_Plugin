@@ -6,11 +6,11 @@ Although I am using neovim, I think it is completely fine to put all the code in
 
 * Python, C/C++
 
-  You can press `space+r` to run python, C/C++ code.
+  You can press `space+r` to run python, C/C++ code
 
 * Latex
 
-  Latex will auto compile when you save it with `:w`
+  Latex will auto compile when you save it with `:w`, and when you leave vim
 
 # Screenshots
 
