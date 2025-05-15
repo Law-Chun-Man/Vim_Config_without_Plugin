@@ -28,12 +28,13 @@ function! GetMode()
   return get(l:mode_map, mode(), 'Unknown')
 endfunction
 
+hi Statusline guifg=#332233 guibg=#000000
 hi StatusLineMode guifg=#000000 guibg=#00ff00 gui=bold
 hi StatusLineFile guifg=#FFFFFF guibg=#771177 gui=bold
-hi StatusLineNormal guifg=#FFFFFF guibg=#332233 gui=bold
-hi StatusLineWord guifg=#FFFFFF guibg=#662266 gui=bold
-hi StatusLinePos guifg=#FFFFFF guibg=#771177 gui=bold
-hi StatusLinePercent guifg=#FFFFFF guibg=#880088 gui=bold
+hi StatusLineNormal guifg=#FFFFFF guibg=#441144 gui=bold
+hi StatusLineWord guifg=#FFFFFF guibg=#441144 gui=bold
+hi StatusLinePos guifg=#FFFFFF guibg=#441144 gui=bold
+hi StatusLinePercent guifg=#FFFFFF guibg=#441144 gui=bold
 
 "set initial status line
 set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineFile#\ %t\ %#StatusLineNormal#\ %m%=%#StatusLineWord#\ %{wordcount().words}\ words,\ %{wordcount().chars}\ chars\ %#StatusLinePos#\ %l,\ %v\ %#StatusLinePercent#\ %p%%\ 
@@ -110,13 +111,13 @@ set mouse=a
 "don't redraw while executing macros (good performance config)
 set lazyredraw
 
-"pressing [s will toggle and untoggle spell checking
-let mapleader = "["
-map <leader>s :setlocal spell!<CR>
-map <leader>n :setlocal nospell<CR>
+let mapleader = " "
 
-"count words
-map <leader>c g<C-g>
+"check spellings for files that will contain texts
+autocmd BufRead,BufNewFile *.txt,*.tex,*.md,*.html setlocal spell spelllang=en
+
+"pressing space+s will toggle spell checking on and off
+map <leader>s :setlocal spell!<CR>
 
 "terminal exit insert mode
 tnoremap <C-[> <C-\><C-n>
@@ -125,27 +126,19 @@ tnoremap <C-[> <C-\><C-n>
 map <leader>r :!./r.sh<CR>
 autocmd FileType python map <leader>r :!python3 "%"<CR>
 autocmd FileType python map <leader>f :!black "%"<CR><CR>
-autocmd FileType rust map <leader>r :!cargo run --profile release<CR>
-autocmd FileType rust map <leader>f :!rustfmt "%"<CR><CR>
-autocmd FileType cpp map <leader>r :!g++ "%" && ./a.out<CR>
 autocmd FileType c map <leader>r :!gcc "%" && ./a.out<CR>
-"for kitty
+autocmd FileType cpp map <leader>r :!g++ "%" && ./a.out<CR>
+
+"for terminal
 map <F22> :!./r.sh<CR>
 autocmd FileType python map <F22> :!python3 "%"<CR>
-autocmd FileType rust map <F22> :!cargo run --profile release<CR>
-autocmd FileType cpp map <F22> :!g++ "%" && ./a.out<CR>
 autocmd FileType c map <F22> :!gcc "%" && ./a.out<CR>
-"remember to open terminal in directory and open file with vi gg.tex
-autocmd BufWritePost *.typ :execute "!typst compile main.typ"
-"autocmd BufWritePost *.typ :execute "!typst compile %"
+autocmd FileType cpp map <F22> :!g++ "%" && ./a.out<CR>
+
+"compile tex file on save and exit
 autocmd BufWritePost *.tex :execute "!./compile.sh %"
 autocmd VimLeave *.tex :execute "!./clean.sh"
-"autocmd BufRead,BufNewFile *.tex map <F11> :!bibtex "%:r.aux"<CR><CR>
-autocmd BufRead,BufNewFile *.tex map <F11> :!bibtex "main.aux"<CR><CR>
-autocmd BufRead,BufNewFile *.typ,*.tex map <leader>p :!xdg-open "%:r.pdf"<CR><CR>
 
-autocmd BufNewFile,BufRead *.typ set filetype=rust
-
-"this is to immediately render when modified
-"autocmd TextChanged,TextChangedI *.typ execute "write | !typst compile %"
+"shortcut for opening pdf file
+autocmd BufRead,BufNewFile *.tex map <leader>p :!atril "%:r.pdf" &<CR><CR>
 
