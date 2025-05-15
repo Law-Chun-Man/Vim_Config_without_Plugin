@@ -6,7 +6,7 @@ Although I am using neovim, I think it is completely fine to put all the code in
 
 * Python, C/C++
 
-  You can press `[r` to run python, C/C++ code.
+  You can press `space+r` to run python, C/C++ code.
 
 * Latex, Typst
 
