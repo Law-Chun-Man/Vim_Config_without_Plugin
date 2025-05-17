@@ -138,15 +138,52 @@ autocmd FileType cpp map <F22> :!g++ "%" && ./a.out<CR>
 "compile tex file on save and exit
 function! CompileLaTeX() abort
     if filereadable('./main.tex')
-        let file = 'main.tex'
+
+        let tex_cmd = '!pdflatex -synctex=1 -interaction=batchmode main.tex > /dev/null 2>&1'
+        let log_parse_cmd = '!grep -E "^(l\.|!)" main.log | sed "s/^l\./Line /"'
+
+        if filereadable('./main.aux') "later run
+            silent execute tex_cmd
+            if v:shell_error
+                execute log_parse_cmd
+            endif
+        else "first run
+            silent execute tex_cmd
+            if v:shell_error
+                execute log_parse_cmd
+            endif
+            let reference = '!biber main.bcf'
+            silent execute reference
+            silent execute tex_cmd
+            silent execute tex_cmd
+        endif
     else
-        let file = expand('%:t')
+
+        let file_name = expand('%:r')
+        let tex_cmd = '!pdflatex -synctex=1 -interaction=batchmode ' . file_name . '.tex > /dev/null 2>&1'
+        let log_parse_cmd = '!grep -E "^(l\.|!)" ' . file_name . '.log | sed "s/^l\./Line /"'
+
+        if filereadable('./' . file_name . '.aux') "later run
+            silent execute tex_cmd
+            if v:shell_error
+                execute log_parse_cmd
+            endif
+        else "first run
+            silent execute tex_cmd
+            if v:shell_error
+                execute log_parse_cmd
+            endif
+            let reference = '!biber ' . file_name . '.bcf'
+            silent execute reference
+            silent execute tex_cmd
+            silent execute tex_cmd
+        endif
     endif
-    let command = '!./compile.sh ' . file
-    execute command
 endfunction
 
 autocmd BufWritePost *.tex call CompileLaTeX()
+
+"clean helper files on leave
 autocmd VimLeave *.tex :execute '!find "./" -type f \( -name "*.aux" -o -name "*.fdb_latexmk" -o -name "*.fls" -o -name "*.log" -o -name "*.gz" -o -name "*.nav" -o -name "*.out" -o -name "*.vrb" -o -name "*.toc" -o -name "*.snm" -o -name "*.xml" -o -name "*.blg" -o -name "*.bcf" -o -name "*.bbl" -o -name "*.bak" -o -name "*Notes.bib" \) -exec rm -f {} \;'
 
 "shortcut for opening pdf file
