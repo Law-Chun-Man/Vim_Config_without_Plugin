@@ -136,9 +136,29 @@ autocmd FileType c map <F22> :!gcc "%" && ./a.out<CR>
 autocmd FileType cpp map <F22> :!g++ "%" && ./a.out<CR>
 
 "compile tex file on save and exit
-autocmd BufWritePost *.tex :execute "!./compile.sh %"
+function! CompileLaTeX() abort
+    if filereadable('./main.tex')
+        let file = 'main.tex'
+    else
+        let file = expand('%:t')
+    endif
+    let command = '!./compile.sh ' . file
+    execute command
+endfunction
+
+autocmd BufWritePost *.tex call CompileLaTeX()
 autocmd VimLeave *.tex :execute "!./clean.sh"
 
 "shortcut for opening pdf file
-autocmd BufRead,BufNewFile *.tex map <leader>p :!atril "%:r.pdf" &<CR><CR>
+function! PDF() abort
+    if filereadable('./main.tex')
+        let pdf = './main.pdf'
+    else
+        let pdf = './' . expand('%:r') . '.pdf'
+    endif
+    let command = '!atril ' . pdf . ' &'
+    execute command
+endfunction
+
+autocmd BufRead,BufNewFile *.tex map <leader>p :call PDF()<CR><CR>
 
