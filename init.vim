@@ -15,7 +15,7 @@ set termguicolors
 
 "set mode name
 function! GetMode()
-  let l:mode_map = {
+  let l:dict = {
         \ 'n': 'Normal',
         \ 'i': 'Insert',
         \ 'v': 'Visual',
@@ -25,7 +25,7 @@ function! GetMode()
         \ 'c': 'Command',
         \ 't': 'Terminal',
         \ }
-  return get(l:mode_map, mode(), 'Unknown')
+  return get(l:dict, mode(), 'Unknown')
 endfunction
 
 hi Statusline guifg=#332233 guibg=#000000
@@ -161,4 +161,16 @@ function! PDF() abort
 endfunction
 
 autocmd BufRead,BufNewFile *.tex map <leader>p :call PDF()<CR><CR>
+
+"render markdown as pdf
+autocmd FileType markdown map <leader>r :!pandoc "%" -f gfm+tex_math_dollars --mathjax -o "%:r".pdf<CR><CR>
+
+function! CompileMarkdown() abort
+    let pdf = './' . expand('%:r') . '.pdf'
+    if filereadable(pdf)
+        let command = '!pandoc ' . expand('%:t') . ' -f gfm+tex_math_dollars --mathjax -o ' . expand('%:r') . '.pdf'
+        execute command
+    endif
+endfunction
+autocmd BufWritePost *.md :call CompileMarkdown()
 
