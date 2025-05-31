@@ -89,11 +89,23 @@ hi CursorLineNr gui=none guifg=#FFFFFF guibg=#004444
 hi LineNr guifg=#FFFFFF
 
 "Visual mode highlight
-highlight Visual guibg=#555555 guifg=NONE
+highlight Visual guibg=#005577 guifg=NONE
+
+"Word suggestions highlight
+highlight Pmenu    guifg=#FFFFFF guibg=#004444
+highlight PmenuSel guifg=#FFFFFF guibg=#00AAAA
+set pumheight=10
 
 "remove search highlight
 nnoremap <Esc> :noh <CR>
 nnoremap <C-[> :noh <CR>
+
+" move selected texts
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" paste remap
+vnoremap p "_dP
 
 "copy to clipboard
 set clipboard=unnamedplus
@@ -113,21 +125,23 @@ set lazyredraw
 
 let mapleader = " "
 
+" select and replace
+vnoremap <leader>r "hy:%s/\V<C-r>=escape(@h, '/\')<CR>//g<Left><Left>
+
 "check spellings for files that will contain texts
 autocmd BufRead,BufNewFile *.txt,*.tex,*.md,*.html setlocal spell spelllang=en
 
 "pressing space+s will toggle spell checking on and off
-map <leader>s :setlocal spell!<CR>
+nnoremap <leader>s :setlocal spell!<CR>
 
 "terminal exit insert mode
 tnoremap <C-[> <C-\><C-n>
 
 "run code
-map <leader>r :!./r.sh<CR>
-autocmd FileType python map <leader>r :!python3 "%"<CR>
-autocmd FileType python map <leader>f :!black "%"<CR><CR>
-autocmd FileType c map <leader>r :!gcc "%" && ./a.out<CR>
-autocmd FileType cpp map <leader>r :!g++ "%" && ./a.out<CR>
+nnoremap <leader>r :!./r.sh<CR>
+autocmd FileType python nnoremap <leader>r :!python3 "%"<CR>
+autocmd FileType c nnoremap <leader>r :!gcc "%" && ./a.out<CR>
+autocmd FileType cpp nnoremap <leader>r :!g++ "%" && ./a.out<CR>
 
 "for terminal
 map <F22> :!./r.sh<CR>
@@ -197,17 +211,21 @@ function! PDF() abort
     execute command
 endfunction
 
+"open latex pdf
 autocmd BufRead,BufNewFile *.tex map <leader>p :call PDF()<CR><CR>
 
 "render markdown as pdf
-autocmd FileType markdown map <leader>r :!pandoc "%" -f gfm+tex_math_dollars --mathjax -o "%:r".pdf<CR><CR>
+autocmd FileType markdown nnoremap <leader>r :!pandoc "%" -o "%:r".pdf<CR><CR>
 
 function! CompileMarkdown() abort
     let pdf = './' . expand('%:r') . '.pdf'
     if filereadable(pdf)
-        let command = '!pandoc ' . expand('%:t') . ' -f gfm+tex_math_dollars --mathjax -o ' . expand('%:r') . '.pdf'
+        let command = '!pandoc ' . expand('%:t') . ' -o ' . expand('%:r') . '.pdf'
         execute command
     endif
 endfunction
 autocmd BufWritePost *.md :call CompileMarkdown()
+
+"open markdown pdf
+autocmd FileType markdown map <leader>p :!atril "%:r".pdf &<CR><CR>
 
