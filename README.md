@@ -1,4 +1,4 @@
-# Vim Config without Plugin
+# Neovim Config with LSP but without Plugin
 
 I like default colour scheme btw, don't judge me:)
 
