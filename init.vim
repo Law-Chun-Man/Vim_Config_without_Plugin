@@ -230,8 +230,8 @@ autocmd FileType markdown nnoremap <leader>p :!atril "%:r".pdf &<CR><CR>
 
 " help menu
 let help = "mode      key         function\n" .
-          \"Normal    zg          add words to the dictionary\n" .
-          \"Normal    zw          remove words from the dictionary\n" .
+          \"Normal    zg          add word to the dictionary\n" .
+          \"Normal    zw          remove word from the dictionary\n" .
           \"Normal    z=          view word suggestions for correction\n" .
           \"Normal    ]+s         move to next misspelled word\n" .
           \"Normal    [+s         move to last misspelled word\n" .
@@ -242,7 +242,7 @@ let help = "mode      key         function\n" .
           \"Insert    ctrl+x+f    show file path suggestions\n" .
           \"Visual    J           move selected texts downward\n" .
           \"Visual    K           move selected texts upward\n" .
-          \"Visual    space+r     replace selected text globally\n"
+          \"Visual    space+r     replace selected texts globally\n"
 nnoremap <leader>h :echo help<CR>
 
 " lsp
