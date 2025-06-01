@@ -65,7 +65,8 @@ local function custom_hover()
             -- Popup adjustment
             offset_x = menu_width,
             offset_y = 0,
-            width = 70,
+            max_width = 70,
+            max_height = 20,
         }
     ))
 end
