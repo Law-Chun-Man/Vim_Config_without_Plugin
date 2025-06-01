@@ -230,6 +230,7 @@ autocmd FileType markdown nnoremap <leader>p :!atril "%:r".pdf &<CR><CR>
 
 " help menu
 let help = "mode      key         function\n" .
+          \"Normal    ctrl+space  list suggestions from LSP\n" .
           \"Normal    zg          add word to the dictionary\n" .
           \"Normal    zw          remove word from the dictionary\n" .
           \"Normal    z=          view word suggestions for correction\n" .
@@ -238,6 +239,7 @@ let help = "mode      key         function\n" .
           \"Normal    space+s     toggle spell checking on and off\n" .
           \"Normal    space+r     run command\n" .
           \"Normal    space+p     open pdf\n" .
+          \"Normal    K           popup preview\n" .
           \"Insert    ctrl+x+s    show correct word suggestions\n" .
           \"Insert    ctrl+x+f    show file path suggestions\n" .
           \"Visual    J           move selected texts downward\n" .
