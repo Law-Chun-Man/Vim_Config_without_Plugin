@@ -21,6 +21,9 @@ function! GetMode()
         \ 'v': 'Visual',
         \ 'V': 'V-Line',
         \ "\<C-v>": 'V-Block',
+        \ "s": 'Select',
+        \ "S": 'S-Line',
+        \ "\<C-s>": 'S-Block',
         \ 'R': 'Replace',
         \ 'c': 'Command',
         \ 't': 'Terminal',
@@ -43,7 +46,7 @@ set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineFile#\ %t\ %#StatusL
 autocmd ModeChanged * if &modifiable && mode() ==# 'n' | hi StatusLineMode guifg=#000000 guibg=#00FF00 | set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineFile#\ %t\ %#StatusLineNormal#\ %m%=%#StatusLineWord#\ %{wordcount().words}\ words,\ %{wordcount().chars}\ chars\ %#StatusLinePos#\ %l,\ %v\ %#StatusLinePercent#\ %p%%\ | endif
 autocmd ModeChanged * if &modifiable && mode() ==# 'i' | hi StatusLineMode guifg=#000000 guibg=#FFA500 | set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineFile#\ %t\ %#StatusLineNormal#\ %m%=%#StatusLineWord#\ %{wordcount().words}\ words,\ %{wordcount().chars}\ chars\ %#StatusLinePos#\ %l,\ %v\ %#StatusLinePercent#\ %p%%\ | endif
 autocmd ModeChanged * if &modifiable && mode() ==# 'R' | hi StatusLineMode guifg=#FFFFFF guibg=#FF0000 | set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineFile#\ %t\ %#StatusLineNormal#\ %m%=%#StatusLineWord#\ %{wordcount().words}\ words,\ %{wordcount().chars}\ chars\ %#StatusLinePos#\ %l,\ %v\ %#StatusLinePercent#\ %p%%\ | endif
-autocmd ModeChanged * if &modifiable && mode() ==# 'v' || mode() ==# 'V' || mode() ==# "\<C-v>" | hi StatusLineMode guifg=#000000 guibg=#00FFFF | set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineFile#\ %t\ %#StatusLineNormal#\ %m%=%#StatusLineWord#\ %{wordcount().visual_words}\ words,\ %{wordcount().visual_chars}\ chars\ %#StatusLinePos#\ %l,\ %v\ %#StatusLinePercent#\ %p%%\ | endif
+autocmd ModeChanged * if &modifiable && mode() ==# 'v' || mode() ==# 'V' || mode() ==# "\<C-v>" || mode() ==# "s" || mode() ==# "S" || mode() ==# "\<C-s>" | hi StatusLineMode guifg=#000000 guibg=#00FFFF | set statusline=%#StatusLineMode#\ %{GetMode()}\ %#StatusLineFile#\ %t\ %#StatusLineNormal#\ %m%=%#StatusLineWord#\ %{wordcount().visual_words}\ words,\ %{wordcount().visual_chars}\ chars\ %#StatusLinePos#\ %l,\ %v\ %#StatusLinePercent#\ %p%%\ | endif
 
 
 "disable autocommenting
@@ -56,13 +59,9 @@ set nobackup
 set noswapfile
 set nowb
 
-"avoid truncating words at the end of the line, move cursor to actual neighbour
+"avoid truncating words at the end of the line
 set wrap
 set lbr
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
 
 "enable smartcase search
 set ignorecase
@@ -111,8 +110,8 @@ vnoremap p "_dP
 set clipboard=unnamedplus
 
 "delete whole word
-imap <C-BS> <C-W>
-imap <C-H> <C-W>
+inoremap <C-BS> <C-W>
+inoremap <C-H> <C-W>
 
 "scroll text if cursor is near top or bottom edge
 set so=5
@@ -144,10 +143,10 @@ autocmd FileType c nnoremap <leader>r :!gcc "%" && ./a.out<CR>
 autocmd FileType cpp nnoremap <leader>r :!g++ "%" && ./a.out<CR>
 
 "for terminal
-map <F22> :!./r.sh<CR>
-autocmd FileType python map <F22> :!python3 "%"<CR>
-autocmd FileType c map <F22> :!gcc "%" && ./a.out<CR>
-autocmd FileType cpp map <F22> :!g++ "%" && ./a.out<CR>
+nnoremap <F22> :!./r.sh<CR>
+autocmd FileType python nnoremap <F22> :!python3 "%"<CR>
+autocmd FileType c nnoremap <F22> :!gcc "%" && ./a.out<CR>
+autocmd FileType cpp nnoremap <F22> :!g++ "%" && ./a.out<CR>
 
 "compile tex file on save and exit
 function! CompileLaTeX() abort
@@ -208,11 +207,11 @@ function! PDF() abort
         let pdf = './' . expand('%:r') . '.pdf'
     endif
     let command = '!atril ' . pdf . ' &'
-    execute command
+    silent execute command
 endfunction
 
 "open latex pdf
-autocmd BufRead,BufNewFile *.tex map <leader>p :call PDF()<CR><CR>
+autocmd BufRead,BufNewFile *.tex nnoremap <leader>p :call PDF()<CR>
 
 "render markdown as pdf
 autocmd FileType markdown nnoremap <leader>r :!pandoc "%" -o "%:r".pdf<CR><CR>
@@ -221,11 +220,26 @@ function! CompileMarkdown() abort
     let pdf = './' . expand('%:r') . '.pdf'
     if filereadable(pdf)
         let command = '!pandoc ' . expand('%:t') . ' -o ' . expand('%:r') . '.pdf'
-        execute command
+        silent execute command
     endif
 endfunction
 autocmd BufWritePost *.md :call CompileMarkdown()
 
 "open markdown pdf
-autocmd FileType markdown map <leader>p :!atril "%:r".pdf &<CR><CR>
+autocmd FileType markdown nnoremap <leader>p :!atril "%:r".pdf &<CR><CR>
+
+" help menu
+let help = "mode      key         function\n" .
+          \"Normal    zg          add words to the dictionary\n" .
+          \"Normal    zw          remove words from the dictionary\n" .
+          \"Normal    z=          view word suggestions for correction\n" .
+          \"Normal    ]+s         move to next misspelled word\n" .
+          \"Normal    [+s         move to last misspelled word\n" .
+          \"Normal    space+s     toggle spell checking on and off\n" .
+          \"Normal    space+r     run command\n" .
+          \"Normal    space+p     open pdf\n" .
+          \"Visual    J           move selected texts downward\n" .
+          \"Visual    K           move selected texts upward\n" .
+          \"Visual    space+r     replace selected text globally\n"
+nnoremap <leader>h :echo help<CR>
 
