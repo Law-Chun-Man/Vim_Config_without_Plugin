@@ -29,10 +29,12 @@ Spell check will be on by default when you open files with extention `.txt`, `.t
 
 | mode | key | function |
 |:---:|:---:|:---:|
+| Normal | ctrl+space | list suggestions from LSP |
 | Normal | space+s | toggle spell checking on and off |
 | Normal | space+p | open pdf of the same name (if there is one) |
 | Normal | space+r/shift+F10 | compile and run C/C++ code or run python code or compile latex/markdown to pdf |
 | Normal | space+h | show a list of keybindings that are useful but rarely mentioned |
+| Normal | K | popup preview |
 | Insert | ctrl+backspace | delete whole word |
 | Visual | J | move selected text downward |
 | Visual | K | move selected text upward |
