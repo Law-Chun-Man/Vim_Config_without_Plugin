@@ -245,4 +245,5 @@ let help = "mode      key         function\n" .
           \"Visual    space+r     replace selected text globally\n"
 nnoremap <leader>h :echo help<CR>
 
+" lsp
 lua require('core')

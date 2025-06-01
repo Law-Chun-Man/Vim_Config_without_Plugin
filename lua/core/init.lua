@@ -1,4 +1,4 @@
--- Set up LSP client
+-- LSP client for python
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'python',
     callback = function()
@@ -6,53 +6,37 @@ vim.api.nvim_create_autocmd('FileType', {
         local client_id = vim.lsp.start_client({
             cmd = {'pylsp'},
             name = 'pylsp',
-            root_dir = vim.fn.getcwd(),  -- Use current dir as project root
-            settings = {}  -- Add custom settings here if needed
+            root_dir = vim.fn.getcwd(),
         })
-
-        if client_id then
-            vim.lsp.buf_attach_client(0, client_id)
-        else
-            vim.notify("Failed to start pylsp", vim.log.levels.ERROR)
-        end
+        vim.lsp.buf_attach_client(0, client_id)
     end
 })
 
+-- LSP client for C/C++
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'c,cpp',
     callback = function()
-        -- Start pylsp and attach to buffer
+        -- Start clangd and attach to buffer
         local client_id = vim.lsp.start_client({
             cmd = {'clangd'},
             name = 'clangd',
-            root_dir = vim.fn.getcwd(),  -- Use current dir as project root
-            settings = {}  -- Add custom settings here if needed
+            root_dir = vim.fn.getcwd(),
         })
-
-        if client_id then
-            vim.lsp.buf_attach_client(0, client_id)
-        else
-            vim.notify("Failed to start clangd", vim.log.levels.ERROR)
-        end
+        vim.lsp.buf_attach_client(0, client_id)
     end
 })
 
--- Enable LSP diagnostics
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = false,
-}
-)
+-- show popup
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = 0 })
 
+-- show word suggestions
 vim.keymap.set('i', '<C-Space>', '<C-x><C-o>', { buffer = 0 })
 
 vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
 vim.opt.completeopt = {'menuone'}
 
+-- function for controlling the dimension of the popup
 local function custom_hover()
     local params = vim.lsp.util.make_position_params()
     
@@ -71,6 +55,7 @@ local function custom_hover()
     ))
 end
 
+-- show popup on the side of the code suggestions
 vim.api.nvim_create_autocmd('CompleteChanged', {
     pattern = '*',
     callback = function()
