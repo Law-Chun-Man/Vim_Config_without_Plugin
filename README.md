@@ -1,36 +1,65 @@
 # Vim Config without Plugin
 
-Although I am using neovim, I think it is completely fine to put all the code in .vimrc. I like default colour scheme btw, don't judge me:)
+I like default colour scheme btw, don't judge me:)
 
-# Code Runner
+## Dependencies
 
-* Python, C/C++
+* NVIM >= v0.7.0
+```bash
+sudo apt install neovim
+```
+* pylsp
+```bash
+sudo apt install python3-pylsp
+```
+* clangd
+```bash
+sudo apt install clangd
+```
+* pandoc
+```bash
+sudo apt install pandoc
+```
 
-  You can press `space+r` to run python, C/C++ code
+## Spell Check
 
-* Latex
+Spell check will be on by default when you open files with extention `.txt`, `.tex`, `.md` and `.html`.
 
-  Latex will auto compile when you save it with `:w`, and when you leave vim
+## Custom keybindings
 
-# Spell Check
+| mode | key | function |
+|:---:|:---:|:---:|
+| Normal | space+s | toggle spell checking on and off |
+| Normal | space+p | open pdf of the same name (if there is one) |
+| Normal | space+r/shift+F10 | compile and run C/C++ code or run python code or compile latex/markdown to pdf |
+| Normal | space+h | show a list of keybindings that are useful but rarely mentioned |
+| Insert | ctrl+backspace | delete whole word |
+| Visual | J | move selected text downward |
+| Visual | K | move selected text upward |
+| Visual | space+r | replace selected texts globally |
 
-You can toggle spell check on and off by `space+s`. Spell check will be on by default when you open files with extention `.txt`, `.tex`, `.md` and `.html`.
+## Custom function
+### Latex
 
-# Screenshots
+* Reference bibtex on the first run
+* Compile latex on save
+* Clean up helper files on exit
 
-* Normal mode
+### Markdown
 
-![normal mode](/screenshots/normal.png)
+* Compile markdown on save only when there is a pdf file with the same name as the markdown file in the same directory
+
+## Screenshots
+
+* C variable suggestions popup
+
+![normal mode](./screenshots/c.png)
 
 
-* Insert mode
+* C error hint
 
-![insert mode](/screenshots/insert.png)
+![insert mode](./screenshots/error.png)
 
-* Visual mode
+* numpy function suggestions popup
 
-![visual mode](/screenshots/visual.png)
-
-* Replace mode
-
-![replace mode](/screenshots/replace.png)
+![visual mode](./screenshots/python.png)
