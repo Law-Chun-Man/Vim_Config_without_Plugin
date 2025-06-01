@@ -238,8 +238,11 @@ let help = "mode      key         function\n" .
           \"Normal    space+s     toggle spell checking on and off\n" .
           \"Normal    space+r     run command\n" .
           \"Normal    space+p     open pdf\n" .
+          \"Insert    ctrl+x+s    show correct word suggestions\n" .
+          \"Insert    ctrl+x+f    show file path suggestions\n" .
           \"Visual    J           move selected texts downward\n" .
           \"Visual    K           move selected texts upward\n" .
           \"Visual    space+r     replace selected text globally\n"
 nnoremap <leader>h :echo help<CR>
 
+lua require('core')
