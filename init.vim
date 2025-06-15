@@ -73,3 +73,4 @@ source ~/.config/nvim/extras/style.vim
 source ~/.config/nvim/extras/functions.vim
 source ~/.config/nvim/extras/latex.vim
 source ~/.config/nvim/extras/remap.vim
+source ~/.config/nvim/extras/netrw.vim
