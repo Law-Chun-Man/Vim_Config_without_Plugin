@@ -65,6 +65,15 @@ autocmd BufRead,BufNewFile *.txt,*.tex,*.md,*.html setlocal spell spelllang=en
 "set max visible word suggestions
 set pumheight=10
 
+"remove file explorer comments
+let g:netrw_banner = 0
+
+"hide dot files
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+
+"set explorer as welcome screen
+autocmd VimEnter * if argc() == 0 | Explore | endif
+
 "lsp
 source ~/.config/nvim/extras/lsp.lua
 
