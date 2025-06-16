@@ -10,6 +10,9 @@ autocmd VimEnter * if argc() == 0 | Explore | endif
 "set number and relative number
 let g:netrw_bufsettings = 'nu rnu'
 
+"set display style
+let g:netrw_liststyle = 1
+
 augroup netrw_mappings
   autocmd!
   autocmd FileType netrw call s:SetupNetrwMappings()
