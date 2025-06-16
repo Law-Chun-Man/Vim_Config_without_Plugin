@@ -72,11 +72,13 @@ autocmd BufRead,BufNewFile *.tex nnoremap <leader>p :call PDF()<CR>
 "shortcuts in latex
 autocmd FileType tex inoremap ;; <Esc>/<++><CR>"_c4l
 autocmd FileType tex inoremap ;m \mathrm{}<Space><++><Esc>F}i
-autocmd FileType tex inoremap ;e \begin{equation}<CR><CR>\end{equation}<CR><Esc>2ki
-autocmd FileType tex inoremap ;a \begin{align}<CR><CR>\end{align}<CR><Esc>2ki
-autocmd FileType tex inoremap ;l \begin{itemize}<CR>\item<Space><CR>\item<Space><++><CR>\end{itemize}<CR><Esc>3kA
-autocmd FileType tex inoremap ;t \begin{table}[H]<CR>\centering<CR>\caption{}<CR>\begin{tabular}{<++>}<CR>\hline<CR><++><CR>\end{tabular}<CR>\label{<++>}<CR>\end{table}<CR><Esc>7k$i
-autocmd FileType tex inoremap ;f \begin{figure}[H]<CR>\centering<CR>\includegraphics[width=\textwidth]{<++>}<CR>\caption{<++>}<CR>\label{<++>}<CR>\end{figure}<CR><Esc>4k0f=a
-autocmd FileType tex inoremap ;c \begin{columns}<CR>\begin{column}{0.45\textwidth}<CR><CR>\end{column}<CR>\begin{column}{0.45\textwidth}<CR><++><CR>\end{column}<CR>\end{columns}<CR><Esc>6kA
-autocmd FileType tex inoremap ;n \begin{frame}<CR>\frametitle{}<CR><++><CR>\end{frame}<CR><Esc>3k$i
-autocmd FileType tex inoremap ;b \begin{block}{}<CR><++><CR>\end{block}<CR><Esc>3k$i
+autocmd FileType tex inoremap ;e \begin{equation}<CR><CR>\end{equation}<Esc>ki
+autocmd FileType tex inoremap ;a \begin{align}<CR><CR>\end{align}<Esc>ki
+autocmd FileType tex inoremap ;l \begin{itemize}<CR>\item<Space><CR>\item<Space><++><CR>\end{itemize}<Esc>2kA
+autocmd FileType tex inoremap ;t \begin{table}[H]<CR>\centering<CR>\caption{}<CR>\begin{tabular}{<++>}<CR>\hline<CR><++><CR>\end{tabular}<CR>\label{<++>}<CR>\end{table}<Esc>6k$i
+autocmd FileType tex inoremap ;f \begin{figure}[H]<CR>\centering<CR>\includegraphics[width=\textwidth]{<++>}<CR>\caption{<++>}<CR>\label{<++>}<CR>\end{figure}<Esc>3k0f=a
+autocmd FileType tex inoremap ;c \begin{columns}<CR>\begin{column}{0.45\textwidth}<CR><CR>\end{column}<CR>\begin{column}{0.45\textwidth}<CR><++><CR>\end{column}<CR>\end{columns}<Esc>5kA
+autocmd FileType tex inoremap ;n \begin{frame}<CR>\frametitle{}<CR><++><CR>\end{frame}<Esc>2k$i
+autocmd FileType tex inoremap ;b \begin{block}{}<CR><++><CR>\end{block}<Esc>2k$i
+autocmd FileType tex inoremap ;/ \frac{}{<++>}<++><Esc>2F}i
+autocmd FileType tex inoremap ;d \frac{\mathrm{d}}{\mathrm{d}<++>}<++><Esc>3F}i
