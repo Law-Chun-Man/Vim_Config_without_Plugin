@@ -1,6 +1,6 @@
 # Neovim Config with LSP but without Plugin
 
-I like default colour scheme btw, don't judge me:)
+I like default colour scheme btw, don't judge me:). The `terminal.lsp` is copied from Radley's [nvim-lite](https://github.com/radleylewis/nvim-lite).
 
 ## Dependencies
 
