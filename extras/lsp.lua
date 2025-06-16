@@ -7,11 +7,34 @@ vim.api.nvim_create_autocmd('FileType', {
             cmd = {'pylsp'},
             name = 'pylsp',
             root_dir = vim.fn.getcwd(),
+            capabilities = vim.lsp.protocol.make_client_capabilities(),
+            settings = {
+                pylsp = {
+                    plugins = {
+                        jedi_completion = {
+                            enabled = true,
+                            eager = true
+                        },
+                    }
+                }
+            }
         })
         vim.lsp.buf_attach_client(0, client_id)
 
+        -- Configure auto-completion
+        vim.bo[0].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
         -- show popup
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = 0 })
+
+        -- rename variable
+        vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { buffer = 0 })
+
+        -- show word suggestions
+        vim.keymap.set('i', '<C-Space>', '<C-x><C-o>', { buffer = 0 })
+        
+        -- immediately complete word when pressing ctrl+space
+        vim.opt.completeopt = {'menuone'}
     end
 })
 
@@ -27,8 +50,20 @@ vim.api.nvim_create_autocmd('FileType', {
         })
         vim.lsp.buf_attach_client(0, client_id)
 
+        -- Configure auto-completion
+        vim.bo[0].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
         -- show popup
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = 0 })
+
+        -- rename variable
+        vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { buffer = 0 })
+
+        -- show word suggestions
+        vim.keymap.set('i', '<C-Space>', '<C-x><C-o>', { buffer = 0 })
+        
+        -- immediately complete word when pressing ctrl+space
+        vim.opt.completeopt = {'menuone'}
     end
 })
 
@@ -43,12 +78,6 @@ local function custom_hover_handler(err, result, ctx, config)
 end
 vim.lsp.handlers["textDocument/hover"] = custom_hover_handler
 
--- show word suggestions
-vim.keymap.set('i', '<C-Space>', '<C-x><C-o>', { buffer = 0 })
-
-vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-vim.opt.completeopt = {'menuone'}
 
 
 --[[
