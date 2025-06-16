@@ -44,12 +44,9 @@ autocmd ModeChanged * if &modifiable && mode() ==# 'v' || mode() ==# 'V' || mode
 "custom tabline
 function! MyTabLine()
     let s = ''
-    "Iterate through each tab
     for i in range(1, tabpagenr('$'))
-        let buflist = tabpagebuflist(i)
-        let winnr = tabpagewinnr(i)
-        let bufnr = buflist[winnr - 1]
-        let bufname = bufname(bufnr)
+        "Start clickable region for tab 'i'
+        let s .= '%' . i . 'T'
 
         "Highlight current tab differently
         if i == tabpagenr()
@@ -57,6 +54,11 @@ function! MyTabLine()
         else
             let s .= '%#TabLine#'
         endif
+
+        let buflist = tabpagebuflist(i)
+        let winnr = tabpagewinnr(i)
+        let bufnr = buflist[winnr - 1]
+        let bufname = bufname(bufnr)
 
         "Tab number
         let s .= ' ' . i . '. '
@@ -80,11 +82,11 @@ endfunction
 set tabline=%!MyTabLine()
 
 "current line highlight colour
-hi CursorLine gui=none guibg=#004444
+hi CursorLine gui=NONE guibg=#004444
 hi Cursorcolumn guibg=#004444
 
 "number and relativenumber set to white
-hi CursorLineNr gui=none guifg=#FFFFFF guibg=#004444
+hi CursorLineNr gui=NONE guifg=#FFFFFF guibg=#004444
 hi LineNr guifg=#FFFFFF
 
 "underline wrong words
@@ -98,4 +100,7 @@ highlight Pmenu    guifg=#FFFFFF guibg=#004444
 highlight PmenuSel guifg=#FFFFFF guibg=#00AAAA
 
 "window separator colour
-highlight WinSeparator guifg=None guibg=#ffffff
+highlight WinSeparator guifg=NONE guibg=#ffffff
+
+"yanked texts highlight
+highlight YankHighlight guibg=#00ffff guifg=#000000

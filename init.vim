@@ -38,7 +38,7 @@ set ai
 set si
 
 "scroll text if cursor is near top or bottom edge
-set so=5
+set so=8
 
 "set mouse to active
 set mouse=a
@@ -65,15 +65,6 @@ autocmd BufRead,BufNewFile *.txt,*.tex,*.md,*.html setlocal spell spelllang=en
 "set max visible word suggestions
 set pumheight=10
 
-"remove file explorer comments
-let g:netrw_banner = 0
-
-"hide dot files
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-
-"set explorer as welcome screen
-autocmd VimEnter * if argc() == 0 | Explore | endif
-
 "lsp
 source ~/.config/nvim/extras/lsp.lua
 
@@ -83,3 +74,4 @@ source ~/.config/nvim/extras/functions.vim
 source ~/.config/nvim/extras/latex.vim
 source ~/.config/nvim/extras/remap.vim
 source ~/.config/nvim/extras/netrw.vim
+source ~/.config/nvim/extras/terminal.lua

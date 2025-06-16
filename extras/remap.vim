@@ -26,7 +26,7 @@ tnoremap <C-[> <C-\><C-n>
 inoremap <C-f> <C-x><C-f>
 
 "open new tab
-nnoremap <C-n> :tabe<Space>
+nnoremap <C-n> :Texplore<CR>
 
 "tab shortcuts
 for i in range(1, 9)

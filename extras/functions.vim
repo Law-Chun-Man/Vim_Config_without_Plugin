@@ -21,6 +21,12 @@ autocmd BufWritePost *.md :call CompileMarkdown()
 "open markdown pdf
 autocmd FileType markdown nnoremap <leader>p :!zathura "%:r".pdf &<CR><CR>
 
+"flash yanked texts
+augroup YankHighlight
+  autocmd!
+  autocmd TextYankPost * lua vim.highlight.on_yank({higroup='YankHighlight', timeout=200})
+augroup END
+
 "help menu
 let help = "mode      key         function\n" .
           \"Normal    ctrl+space  list suggestions from LSP\n" .
