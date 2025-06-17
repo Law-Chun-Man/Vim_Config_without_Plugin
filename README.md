@@ -34,6 +34,9 @@ Spell check will be on by default when you open files with extention `.txt`, `.t
 | Normal | space+p | open pdf of the same name (if there is one) |
 | Normal | space+r | compile and run C/C++ code or run python code or compile latex/markdown to pdf |
 | Normal | space+h | show a list of keybindings that are useful but rarely mentioned |
+| Normal | space+e | open terminal |
+| Normal | space+t | open new tab |
+| Normal | space+number | go to tab number |
 | Normal | K | popup preview |
 | Normal | ctrl+n | open new tab |
 | Insert | ctrl+backspace | delete whole word |
