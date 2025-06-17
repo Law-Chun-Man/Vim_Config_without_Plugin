@@ -26,11 +26,9 @@ tnoremap <C-[> <C-\><C-n>
 inoremap <C-f> <C-x><C-f>
 
 "open new tab
-nnoremap <C-n> :Texplore<CR>
+nnoremap <leader>t :Texplore<CR>
 
 "tab shortcuts
 for i in range(1, 9)
-    execute "nnoremap <A-" . i . "> " . i . "gt"
-    execute "inoremap <A-" . i . "> <C-o>" . i . "gt"
-    execute "vnoremap <A-" . i . "> " . i . "gt"
+    execute "nnoremap <leader>" . i . " " . i . "gt"
 endfor

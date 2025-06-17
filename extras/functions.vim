@@ -38,8 +38,10 @@ let help = "mode      key         function\n" .
           \"Normal    space+s     toggle spell checking on and off\n" .
           \"Normal    space+r     run command\n" .
           \"Normal    space+p     open pdf\n" .
+          \"Normal    space+e     open terminal\n" .
           \"Normal    K           popup preview\n" .
-          \"Normal    ctrl+n      open new tab\n" .
+          \"Normal    space+t     open new tab\n" .
+          \"Normal  space+number  go to tab number\n" .
           \"Insert    ctrl+x+s    show correct word suggestions\n" .
           \"Insert    ctrl+x+f    show file path suggestions\n" .
           \"Visual    J           move selected texts downward\n" .
