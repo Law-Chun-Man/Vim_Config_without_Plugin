@@ -36,8 +36,10 @@ Spell check will be on by default when you open files with extention `.txt`, `.t
 | Normal | space+h | show a list of keybindings that are useful but rarely mentioned |
 | Normal | space+e | open terminal |
 | Normal | space+t | open new tab |
+| Normal | space+o | find file and open in new tab |
 | Normal | space+number | go to tab number |
 | Normal | K | popup preview |
+| Normal | F2 | rename a variable |
 | Normal | ctrl+n | open new tab |
 | Insert | ctrl+backspace | delete whole word |
 | Visual | J | move selected text downward |
