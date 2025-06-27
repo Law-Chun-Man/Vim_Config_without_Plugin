@@ -87,4 +87,5 @@ Spell check will be on by default when you open files with extention `.txt`, `.t
 
 ![C error](./screenshots/error.png)
 
-
+* Pylsp
+![pylsp](./screenshots/pylsp.png)
