@@ -77,36 +77,3 @@ local function custom_hover_handler(err, result, ctx, config)
     return original_hover_handler(err, result, ctx, config)
 end
 vim.lsp.handlers["textDocument/hover"] = custom_hover_handler
-
-
-
---[[
--- function for controlling the dimension of the popup
-local function custom_hover()
-    local params = vim.lsp.util.make_position_params()
-    
-    -- Get completion menu position (if visible)
-    local pum_pos = vim.fn.pum_getpos()
-    local menu_width = pum_pos and pum_pos.width or 0
-    
-    vim.lsp.buf_request(0, 'textDocument/hover', params, vim.lsp.with(
-        vim.lsp.handlers.hover, {
-            -- Popup adjustment
-            offset_x = menu_width,
-            offset_y = 0,
-            max_width = 70,
-            max_height = 20,
-        }
-    ))
-end
-
--- show popup on the side of the code suggestions
-vim.api.nvim_create_autocmd('CompleteChanged', {
-    pattern = '*',
-    callback = function()
-        if vim.fn.pumvisible() == 1 then
-            vim.schedule(custom_hover)
-        end
-    end,
-})
-]]

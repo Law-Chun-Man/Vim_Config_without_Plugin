@@ -6,13 +6,6 @@ local terminal_state = {
 }
 
 local function FloatingTerminal()
-    -- If terminal is already open, close it (toggle behavior)
-    if terminal_state.is_open and vim.api.nvim_win_is_valid(terminal_state.win) then
-        vim.api.nvim_win_close(terminal_state.win, false)
-        terminal_state.is_open = false
-        return
-    end
-
     -- Create buffer if it doesn't exist or is invalid
     if not terminal_state.buf or not vim.api.nvim_buf_is_valid(terminal_state.buf) then
         terminal_state.buf = vim.api.nvim_create_buf(false, true)
@@ -21,8 +14,8 @@ local function FloatingTerminal()
     end
 
     -- Calculate window dimensions
-    local width = math.floor(vim.o.columns * 0.5)
-    local height = math.floor(vim.o.lines * 0.5)
+    local width = math.floor(vim.o.columns * 0.7)
+    local height = math.floor(vim.o.lines * 0.7)
     local row = math.floor((vim.o.lines - height) / 3)
     local col = math.floor((vim.o.columns - width) / 2)
 
@@ -37,16 +30,9 @@ local function FloatingTerminal()
         border = 'single',
     })
 
-    -- Set transparency for the floating window
-    vim.api.nvim_win_set_option(terminal_state.win, 'winblend', 0)
-
     -- Set transparent background for the window
     vim.api.nvim_win_set_option(terminal_state.win, 'winhighlight',
     'Normal:FloatingTermNormal,FloatBorder:FloatingTermBorder')
-
-    -- Define highlight groups for transparency
-    vim.api.nvim_set_hl(0, "FloatingTermNormal", { bg = "none" })
-    vim.api.nvim_set_hl(0, "FloatingTermBorder", { bg = "none", })
 
     -- Start terminal if not already running
     local has_terminal = false
@@ -64,27 +50,12 @@ local function FloatingTerminal()
 
     terminal_state.is_open = true
     vim.cmd("startinsert")
-
-    -- Set up auto-close on buffer leave 
-    vim.api.nvim_create_autocmd("BufLeave", {
-        buffer = terminal_state.buf,
-        callback = function()
-            if terminal_state.is_open and vim.api.nvim_win_is_valid(terminal_state.win) then
-                vim.api.nvim_win_close(terminal_state.win, false)
-                terminal_state.is_open = false
-            end
-        end,
-        once = true
-    })
 end
 
--- Function to explicitly close the terminal
-local function CloseFloatingTerminal()
-    if terminal_state.is_open and vim.api.nvim_win_is_valid(terminal_state.win) then
-        vim.api.nvim_win_close(terminal_state.win, false)
-        terminal_state.is_open = false
-    end
-end
+-- Create command mode function
+vim.api.nvim_create_user_command('FloatingTerminal', function()
+  FloatingTerminal()
+end, {})
 
 -- Key mappings
 vim.keymap.set("n", "<leader>e", FloatingTerminal, { noremap = true, silent = true, desc = "Toggle floating terminal" })

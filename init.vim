@@ -15,6 +15,12 @@ set termguicolors
 set splitright
 set splitbelow
 
+"search files in subdirectories
+set path+=**
+
+"remove blue ~ in front of empty lines
+set fillchars=eob:\ 
+
 "disable autocommenting
 autocmd FileType * setlocal formatoptions-=cro
 
@@ -65,6 +71,12 @@ autocmd BufRead,BufNewFile *.txt,*.tex,*.md,*.html setlocal spell spelllang=en
 "set max visible word suggestions
 set pumheight=10
 
+"return to last edit position when opening files
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \ exe "normal! g`\"zz" |
+    \ endif
+
 "lsp
 source ~/.config/nvim/extras/lsp.lua
 
@@ -75,3 +87,4 @@ source ~/.config/nvim/extras/latex.vim
 source ~/.config/nvim/extras/remap.vim
 source ~/.config/nvim/extras/netrw.vim
 source ~/.config/nvim/extras/terminal.lua
+source ~/.config/nvim/extras/welcome_screen.vim

@@ -89,9 +89,6 @@ hi Cursorcolumn guibg=#004444
 hi CursorLineNr gui=NONE guifg=#FFFFFF guibg=#004444
 hi LineNr guifg=#FFFFFF
 
-"underline wrong words
-highlight SpellBad guibg=#ff0000 ctermbg=red
-
 "Visual mode highlight
 highlight Visual guibg=#005577 guifg=NONE
 
