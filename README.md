@@ -75,15 +75,10 @@ Spell check will be on by default when you open files with extention `.txt`, `.t
 
 ## Screenshots
 
-* C variable suggestions popup
+* Welcome screen
 
-![normal mode](./screenshots/c.png)
-
+![welome screen](./screenshots/welcome_screen.png)
 
 * C error hint
 
-![insert mode](./screenshots/error.png)
-
-* numpy function suggestions popup
-
-![visual mode](./screenshots/python.png)
+![C error](./screenshots/error.png)
