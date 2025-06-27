@@ -79,6 +79,12 @@ Spell check will be on by default when you open files with extention `.txt`, `.t
 
 ![welome screen](./screenshots/welcome_screen.png)
 
+* Built in file explorer
+
+![netrw](./screenshots/netrw.png)
+
 * C error hint
 
 ![C error](./screenshots/error.png)
+
+
