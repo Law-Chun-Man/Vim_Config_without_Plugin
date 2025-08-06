@@ -8,7 +8,8 @@ let g:netrw_dirhistmax = 0
 let g:netrw_sizestyle = "H"
 
 "sort folders first, and case insensitive sorting
-let g:netrw_sort_by = "exten"
+"let g:netrw_sort_by = "exten"
+let g:netrw_sort_sequence = '[\/]$,*'
 let g:netrw_sort_options = "i"
 
 "hide dot files
@@ -18,7 +19,7 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_bufsettings = 'nu rnu'
 
 "set display style
-let g:netrw_liststyle = 1
+"let g:netrw_liststyle = 1
 
 augroup netrw_mappings
   autocmd!

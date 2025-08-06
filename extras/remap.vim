@@ -16,9 +16,6 @@ vnoremap <leader>r "hy:%s/\V<C-r>=escape(@h, '/\')<CR>//g<Left><Left>
 "pressing space+s will toggle spell checking on and off
 nnoremap <leader>s :setlocal spell!<CR>
 
-"terminal exit insert mode
-tnoremap <C-[> <C-\><C-n>
-
 "suggest file name
 inoremap <C-f> <C-x><C-f>
 

@@ -6,6 +6,9 @@ autocmd FileType python nnoremap <leader>r :!python3 "%"<CR>
 autocmd FileType c nnoremap <leader>r :!gcc "%" && ./a.out<CR>
 autocmd FileType cpp nnoremap <leader>r :!g++ "%" && ./a.out<CR>
 
+"auto compile suckless software
+autocmd BufRead,BufNewFile config.def.h nnoremap <leader>r :!sudo rm config.h && sudo make clean install<CR>
+
 "render markdown as pdf
 autocmd FileType markdown nnoremap <leader>r :!pandoc "%" -o "%:r".pdf<CR><CR>
 

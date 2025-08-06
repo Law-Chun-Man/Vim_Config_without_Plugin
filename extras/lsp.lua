@@ -35,6 +35,12 @@ vim.api.nvim_create_autocmd('FileType', {
         
         -- immediately complete word when pressing ctrl+space
         vim.opt.completeopt = {'menuone'}
+
+        -- for not hiding error column when editing
+        vim.o.signcolumn = "yes"
+
+        -- setting error column to be transparent
+        vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'none' })
     end
 })
 
@@ -64,6 +70,12 @@ vim.api.nvim_create_autocmd('FileType', {
         
         -- immediately complete word when pressing ctrl+space
         vim.opt.completeopt = {'menuone'}
+
+        -- for not hiding error column when editing
+        vim.o.signcolumn = "yes"
+
+        -- setting error column to be transparent
+        vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'none' })
     end
 })
 

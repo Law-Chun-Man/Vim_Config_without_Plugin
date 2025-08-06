@@ -86,5 +86,5 @@ source ~/.config/nvim/extras/functions.vim
 source ~/.config/nvim/extras/latex.vim
 source ~/.config/nvim/extras/remap.vim
 source ~/.config/nvim/extras/netrw.vim
-source ~/.config/nvim/extras/terminal.lua
+source ~/.config/nvim/extras/terminal.vim
 source ~/.config/nvim/extras/welcome_screen.vim

@@ -61,7 +61,7 @@ function! ShowCustomWelcome()
     noremap <buffer> l :normal! '0<CR>
     noremap <buffer> f :Ex<CR>
     noremap <buffer> r :bro o<CR>
-    noremap <buffer> e :FloatingTerminal<CR>
+    noremap <buffer> e :ter<CR>
     noremap <buffer> t :Texplore<CR>
     noremap <buffer> q :qall<CR>
   endif
