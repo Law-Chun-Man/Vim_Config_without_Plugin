@@ -43,7 +43,6 @@ let help = "mode      key           function\n" .
           \"Normal    space+p       open pdf\n" .
           \"Normal    space+e       open terminal\n" .
           \"Normal    K             popup preview\n" .
-          \"Normal    space+d       search word online\n" .
           \"Normal    space+t       open new tab\n" .
           \"Normal    space+v       open new split\n" .
           \"Normal    alt+number    go to tab number\n" .
