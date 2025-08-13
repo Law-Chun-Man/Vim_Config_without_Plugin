@@ -35,13 +35,14 @@ Spell check will be on by default when you open files with extention `.txt`, `.t
 | Normal | space+r | compile and run C/C++ code or run python code or compile latex/markdown to pdf |
 | Normal | space+h | show a list of keybindings that are useful but rarely mentioned |
 | Normal | space+e | open terminal |
-| Normal | space+t | open new tab |
-| Normal | space+o | find file and open in new tab |
-| Normal | space+number | go to tab number |
+| Normal | space+t | open new tab browser |
+| Normal | space+v | open new split browser |
+| Normal | alt+number | go to tab number |
 | Normal | K | popup preview |
 | Normal | F2 | rename a variable |
-| Normal | ctrl+n | open new tab |
 | Insert | ctrl+backspace | delete whole word |
+| Insert | ctrl+s | show correct word suggestions |
+| Insert | ctrl+f | show file path suggestions |
 | Visual | J | move selected text downward |
 | Visual | K | move selected text upward |
 | Visual | space+r | replace selected texts globally |
