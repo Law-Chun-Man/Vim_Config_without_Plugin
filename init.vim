@@ -1,90 +1,91 @@
-set nu
-set rnu
-set numberwidth=1
-set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-syntax on
-set history=500
-set encoding=utf-8
-set noshowmode
-set cmdheight=1
-set showcmd
-set termguicolors
-set splitright
-set splitbelow
+se nu
+se rnu
+se nuw=1
+se et
+se ts=4
+se sw=4
+se sts=4
+syn on
+se enc=utf-8
+se sc
+se tgc
+se spr
+se sb
+se shm+=I
 
 "search files in subdirectories
-set path+=**
+se pa+=**
 
 "remove blue ~ in front of empty lines
-set fillchars=eob:\ 
+se fcs=eob:\ 
 
 "disable autocommenting
-autocmd FileType * setlocal formatoptions-=cro
+autocmd FileType * setl formatoptions-=cro
 
 "turn off backups, and check if the file is changed externally
-set autoread
-au FocusGained,BufEnter * silent! checktime
-set nobackup
-set noswapfile
-set nowb
+se ar
+au FocusGained,BufEnter * sil! checkt
+se nobk
+se noswf
+se nowb
 
 "avoid truncating words at the end of the line
-set wrap
-set lbr
+se wrap
+se lbr
 
 "enable smartcase search
-set ignorecase
-set smartcase
+se ic
+se scs
 
 "indent
-set ai
-set si
+se ai
+se si
 
 "scroll text if cursor is near top or bottom edge
-set so=8
+se so=8
 
 "set mouse to active
-set mouse=a
+se mouse=a
 
 "don't redraw while executing macros (good performance config)
-set lazyredraw
+se lz
 
 "highlight search
-set hlsearch
+se hls
 
 "highlight while searching
-set incsearch
+se is
 
 "copy to clipboard
-set clipboard=unnamedplus
+se cb=unnamedplus
 
 "highlight current line
-set cursorline
-set cursorcolumn
+se cul
+se cuc
 
 "check spellings for files that will contain texts
-autocmd BufRead,BufNewFile *.txt,*.tex,*.md,*.html setlocal spell spelllang=en
+autocmd BufRead,BufNewFile *.txt,*.tex,*.md,*.html setl spell spl=en
 
 "set max visible word suggestions
-set pumheight=10
+se ph=10
 
 "return to last edit position when opening files
 autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \ exe "normal! g`\"zz" |
-    \ endif
+    \ en
 
 "lsp
-source ~/.config/nvim/extras/lsp.lua
+if expand('%:e') =~ 'py\|c\|cpp'
+    so ~/.config/nvim/extras/lsp.lua
+en
 
 "more vim scripts
-source ~/.config/nvim/extras/style.vim
-source ~/.config/nvim/extras/functions.vim
-source ~/.config/nvim/extras/latex.vim
-source ~/.config/nvim/extras/remap.vim
-source ~/.config/nvim/extras/netrw.vim
-source ~/.config/nvim/extras/terminal.vim
-source ~/.config/nvim/extras/welcome_screen.vim
+so ~/.config/nvim/extras/style.vim
+so ~/.config/nvim/extras/functions.vim
+so ~/.config/nvim/extras/remap.vim
+so ~/.config/nvim/extras/netrw.vim
+so ~/.config/nvim/extras/terminal.vim
+if expand('%:e') == 'tex'
+    so ~/.config/nvim/extras/latex.vim
+en
