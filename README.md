@@ -72,20 +72,3 @@ Spell check will be on by default when you open files with extention `.txt`, `.t
 ### Markdown
 
 * Compile markdown on save only when there is a pdf file with the same name as the markdown file in the same directory
-
-## Screenshots
-
-* Welcome screen
-
-![welome screen](./screenshots/welcome_screen.png)
-
-* Built in file explorer
-
-![netrw](./screenshots/netrw.png)
-
-* C error hint
-
-![C error](./screenshots/error.png)
-
-* Pylsp
-![pylsp](./screenshots/pylsp.png)
